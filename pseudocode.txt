@@ -1,0 +1,15 @@
+
+create book object that has attributes of author, page number, book name,
+whether its been read or not, and optionally notes (optional as in optional 
+for me to add this feature).
+
+Then create a function that allows the user to create a new instance of the 
+book object and stores each instance in an array
+
+after this, there should be a function that displays each object in the array
+on the webpage in the form of a "card"
+
+a button may be pressed on each card that will switch the boolean "read" value
+
+one last function should allow the user to delete a book from the array and remove
+it from being displayed on the page.
