@@ -31,6 +31,8 @@ body {
     padding: 24px;
     display: grid;
     gap: 12px;
+    grid-template-columns: repeat(auto-fit, 250px);
+    overflow: auto;
 }
 
 #sidebar {
@@ -89,29 +91,71 @@ a:visited {
 
 #sidebar button:active {
 
-    outline: 2px solid #CFCFEA;
+    outline: 2px solid rgb(128, 128, 169);
 }
 
 .book {
 
     height: 300px;
-    width: 250px;
     background-color: #edebeb;
     display: grid;
     border-radius: 8px;
-    grid-template-rows: 4rem 2rem 1rem 1fr;
+    grid-template-rows: 4rem 2rem 1fr 2rem;
     gap: 4px;
+    padding: 0 8px;
 }
 
 .nameRow {
 
-    font-size: 2rem;
+    font-size: 1.5rem;
     display: grid;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+    grid-row: 1 / 2;
+    border-bottom: 2px solid grey;
+    border-radius: 2px;
+}
+
+.authorRow {
+
+    font-size: 1.1rem;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    grid-row: 2 / 3;
+}
+
+.review {
+
+    grid-row: 3 / 4;
+    border: 2px solid grey;
+    border-radius: 4px;
+    padding: 2px;
 }
 
 .hasRead {
 
-    background-color: green;
+    /* background-color: rgb(213, 240, 213); */
+    background: linear-gradient( 
+        to right,
+        rgb(213, 240, 213) 10px,
+        #edebeb 10px
+    );
+}
+
+.actions {
+
+    grid-row: 4 / 5;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+}
+
+.actions button {
+
+    height: 1.25rem;
+    width: 75px;
 }
