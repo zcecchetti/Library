@@ -28,6 +28,9 @@ body {
     background-color: white;
     grid-row: 2 / 3;
     grid-column: 2 / 3;
+    padding: 24px;
+    display: grid;
+    gap: 12px;
 }
 
 #sidebar {
@@ -35,6 +38,9 @@ body {
     background-color: #816C61;
     grid-row: 2 / 3;
     grid-column: 1 / 2;
+    display: flex;
+    justify-content: center;
+    padding: 12px;
 }
 
 #title {
@@ -63,4 +69,49 @@ a {
 a:visited {
 
     color: white;
+}
+
+#sidebar button {
+
+   height: 1.5rem;
+   background-color: #e9e7e7;
+   font-size: 1.25rem;
+   border: 0;
+   border-radius: 2px;
+   width: 200px;
+   color: rgb(128, 128, 169);
+}
+
+#sidebar button:hover {
+
+    background-color: #bdbaba;
+}
+
+#sidebar button:active {
+
+    outline: 2px solid #CFCFEA;
+}
+
+.book {
+
+    height: 300px;
+    width: 250px;
+    background-color: #edebeb;
+    display: grid;
+    border-radius: 8px;
+    grid-template-rows: 4rem 2rem 1rem 1fr;
+    gap: 4px;
+}
+
+.nameRow {
+
+    font-size: 2rem;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.hasRead {
+
+    background-color: green;
 }
