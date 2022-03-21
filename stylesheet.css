@@ -31,7 +31,7 @@ body {
     padding: 24px;
     display: grid;
     gap: 12px;
-    grid-template-columns: repeat(auto-fit, 250px);
+    grid-template-columns: repeat(auto-fit, 275px);
     overflow: auto;
 }
 
@@ -81,7 +81,7 @@ a:visited {
    border: 0;
    border-radius: 2px;
    width: 200px;
-   color: rgb(128, 128, 169);
+   color: rgb(52, 52, 69);
 }
 
 #sidebar button:hover {
@@ -91,7 +91,7 @@ a:visited {
 
 #sidebar button:active {
 
-    outline: 2px solid rgb(128, 128, 169);
+    outline: 2px solid rgb(52, 52, 69);
 }
 
 .book {

@@ -1,5 +1,5 @@
 
-create book object that has attributes of author, page number, book name,
+create book object that has attributes of author, review, book name,
 whether its been read or not, and optionally notes (optional as in optional 
 for me to add this feature).
 
