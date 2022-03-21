@@ -19,9 +19,8 @@ book.prototype.addBook = function() {
 };
 
 // removes book from array
-function removeBook() {
+function removeBook(title) {
 
-    title = prompt("what is the book name? ")
     let index = myLibrary.findIndex(x => x.bookName === title);
     myLibrary.splice(index, 1);
     removeCard(title);
@@ -65,12 +64,14 @@ book.prototype.addBookCard = function() {
     } else {
         const editButton = document.createElement('button');
         editButton.textContent = "Not Read";
+        editButton.setAttribute("id", this.bookName + "edit");
         userActions.appendChild(editButton);
     };
 
     const removeButton = document.createElement("button");
     removeButton.textContent = "Remove";
     userActions.appendChild(removeButton);
+
 }; 
 
 // iterate through myLibrary array and display book cards on page
@@ -102,3 +103,9 @@ function removeCard(title) {
     const divContainer = document.getElementById("bookCards");
     divContainer.removeChild(removeTitle);
 };
+
+// get button elements and call functions when clicked
+const addBookButton = document.getElementById("addNewBook");
+
+addBookButton.addEventListener("click", createBook);
+
