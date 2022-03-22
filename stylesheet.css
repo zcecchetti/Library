@@ -176,3 +176,22 @@ a:visited {
     height: 1.25rem;
     width: 75px;
 }
+
+textarea {
+
+    resize: none;
+    width: 250px;
+}
+
+input [type=text] {
+
+    width: 250px;
+}
+
+/* form {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+} */

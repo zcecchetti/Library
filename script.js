@@ -58,7 +58,7 @@ book.prototype.addBookCard = function() {
     const editButton = document.createElement('button');
     editButton.classList.add("editButton");
 
-    if (this.hasRead) {
+    if (this.hasRead === "true") {
         newCard.classList.add("readBook");
         editButton.textContent = "Read";
         userActions.appendChild(editButton);
@@ -128,12 +128,12 @@ function showBooks(myLibrary) {
 }; 
 
 // creates new book object
-let createBook = function() {
+let createBook = function(bookName, author, review, hasRead) {
 
-    bookName = prompt("name? ");
-    author = prompt("author? ");
-    review = prompt("what did you think of it?");
-    hasRead = prompt("have you read this yet? ")
+    // bookName = prompt("name? ");
+    // author = prompt("author? ");
+    // review = prompt("what did you think of it?");
+    // hasRead = prompt("have you read this yet? ")
 
     const newBook = new book(bookName, author, review, hasRead)
     newBook.addBook();
@@ -173,13 +173,14 @@ function createForm () {
 
     const userForm = document.createElement("form");
     userForm.setAttribute("id", "bookData");
-    userForm.setAttribute("onsubmit", "createBook(); return false");
+    userForm.setAttribute("onsubmit", "getAndCreate(); return false");
     newCard.appendChild(userForm);
 
     const nameDiv = document.createElement("div");
     const nameInput = document.createElement("input");
     nameInput.setAttribute("type", "text");
     nameInput.setAttribute("name", "bookName")
+    nameInput.setAttribute("id", "nameText")
     nameInput.setAttribute("placeholder", "Book Name");
     nameInput.setAttribute("required", "");
     nameDiv.appendChild(nameInput);
@@ -190,14 +191,16 @@ function createForm () {
     authorInput.setAttribute("type", "text");
     authorInput.setAttribute("name", "Author")
     authorInput.setAttribute("placeholder", "Author");
+    authorInput.setAttribute("id", "authorText")
     authorDiv.appendChild(authorInput);
     userForm.appendChild(authorDiv);
 
     const reviewDiv = document.createElement("div");
     const reviewInput = document.createElement("textarea");
     reviewInput.setAttribute("name", "Author")
-    reviewInput.setAttribute("rows", "10");
-    reviewInput.setAttribute("cols", "25");
+    // reviewInput.setAttribute("rows", "9");
+    // reviewInput.setAttribute("cols", "29");
+    reviewInput.setAttribute("id", "reviewText")
     reviewInput.setAttribute("placeholder", "What do you think about this book?");
     reviewDiv.appendChild(reviewInput);
     userForm.appendChild(reviewDiv);
@@ -239,6 +242,41 @@ function createForm () {
     submitButton.setAttribute("type", "submit");
     submitButton.textContent = "Add Book!";
     userForm.appendChild(submitButton);
-
 };
 
+// get entries from form
+function getName() {
+
+    const nameInput = document.getElementById("nameText").value;
+    return nameInput
+};
+
+function getAuthor() {
+
+    const authorInput = document.getElementById("authorText").value;
+    return authorInput
+};
+
+function getReview() {
+
+    const nameInput = document.getElementById("reviewText").value;
+    return nameInput
+};
+
+function getRead() {
+
+    const readInput = document.querySelector("input[name='hasRead']:checked").value;
+    return readInput
+};
+
+// get entries and create book
+
+function getAndCreate() {
+
+    const bookName = getName();
+    const author = getAuthor();
+    const review = getReview();
+    const hasRead = getRead();
+    
+    createBook(bookName, author, review, hasRead);
+};
