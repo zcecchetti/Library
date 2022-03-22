@@ -57,6 +57,7 @@ book.prototype.addBookCard = function() {
     newCard.appendChild(userActions);
 
     const editButton = document.createElement('button');
+    editButton.classList.add("editButton");
 
     if (this.hasRead) {
         newCard.classList.add("readBook");
@@ -64,9 +65,7 @@ book.prototype.addBookCard = function() {
         userActions.appendChild(editButton);
     } else {
         newCard.classList.add("notReadBook")
-        // const editButton = document.createElement('button');
         editButton.textContent = "Not Read";
-        // editButton.setAttribute("id", this.bookName + "edit");
         userActions.appendChild(editButton);
     };
 
@@ -74,6 +73,8 @@ book.prototype.addBookCard = function() {
 
         let title = this.bookName;
         changeRead(title);
+        let text = editButton.textContent;
+        changeReadText(text, title);
     });
 
     const removeButton = document.createElement("button");
@@ -98,6 +99,21 @@ function changeRead(title) {
     } else {
         getCard.classList.remove("notReadBook");
         getCard.classList.add("readBook");
+    };
+};
+
+// change text in editButton
+function changeReadText(text, title) {
+
+    // const getCard = document.getElementById("#"+title)
+    const cardContainer = document.querySelector(`#${title}`);
+    const actions = cardContainer.querySelector(".actions");
+    const editButton = actions.querySelector(".editButton");
+    if (text === "Read") {
+
+        editButton.textContent = "Not Read"
+    } else {
+        editButton.textContent = "Read"
     };
 };
 
