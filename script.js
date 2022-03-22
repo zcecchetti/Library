@@ -32,7 +32,7 @@ book.prototype.addBookCard = function() {
 
     const divContainer = document.getElementById("bookCards");
     const newCard = document.createElement('div');
-    newCard.classList.add("book");
+    // newCard.classList.add("book");
     newCard.setAttribute("id", this.bookName);
 
     divContainer.appendChild(newCard);
@@ -56,21 +56,28 @@ book.prototype.addBookCard = function() {
     userActions.classList.add("actions");
     newCard.appendChild(userActions);
 
+    const editButton = document.createElement('button');
+
     if (this.hasRead) {
-        newCard.classList.add("hasRead");
-        const editButton = document.createElement('button');
+        newCard.classList.add("readBook");
         editButton.textContent = "Read";
         userActions.appendChild(editButton);
     } else {
-        const editButton = document.createElement('button');
+        newCard.classList.add("notReadBook")
+        // const editButton = document.createElement('button');
         editButton.textContent = "Not Read";
-        editButton.setAttribute("id", this.bookName + "edit");
+        // editButton.setAttribute("id", this.bookName + "edit");
         userActions.appendChild(editButton);
     };
 
+    editButton.addEventListener("click", () => {
+
+        let title = this.bookName;
+        changeRead(title);
+    });
+
     const removeButton = document.createElement("button");
     removeButton.textContent = "Remove";
-    removeButton.setAttribute("id", "remove" + this.bookName)
     userActions.appendChild(removeButton);
 
     removeButton.addEventListener("click", () => {
@@ -80,6 +87,19 @@ book.prototype.addBookCard = function() {
     });
 
 }; 
+
+// change hasRead status
+function changeRead(title) {
+
+    const getCard = document.getElementById(title);
+    if (getCard.className === "readBook") {
+        getCard.classList.remove("readBook");
+        getCard.classList.add("notReadBook");
+    } else {
+        getCard.classList.remove("notReadBook");
+        getCard.classList.add("readBook");
+    };
+};
 
 // iterate through myLibrary array and display book cards on page
 function showBooks(myLibrary) {
