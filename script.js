@@ -154,7 +154,6 @@ addBookButton.addEventListener("click", () => {
     }
     formCount++;
     createForm();
-    // createBook();
 });
 
 // create form so user can input information regarding book

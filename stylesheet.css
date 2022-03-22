@@ -181,17 +181,27 @@ textarea {
 
     resize: none;
     width: 250px;
+    height: 150px;
 }
 
-input [type=text] {
+#nameText, #authorText {
 
-    width: 250px;
+    width: 248px;
 }
 
-/* form {
+fieldset {
+
+    width: 220px;
+}
+
+form {
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    padding: 10px 6px 10px 2px;
     align-items: center;
-} */
+}
+
+button[type="submit"] {
+    width: 100px;
+}
