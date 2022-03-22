@@ -70,7 +70,14 @@ book.prototype.addBookCard = function() {
 
     const removeButton = document.createElement("button");
     removeButton.textContent = "Remove";
+    removeButton.setAttribute("id", "remove" + this.bookName)
     userActions.appendChild(removeButton);
+
+    removeButton.addEventListener("click", () => {
+
+        let title = this.bookName;
+        removeBook(title);
+    });
 
 }; 
 
