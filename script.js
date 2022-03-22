@@ -32,7 +32,6 @@ book.prototype.addBookCard = function() {
 
     const divContainer = document.getElementById("bookCards");
     const newCard = document.createElement('div');
-    // newCard.classList.add("book");
     newCard.setAttribute("id", this.bookName);
 
     divContainer.appendChild(newCard);
@@ -87,6 +86,7 @@ book.prototype.addBookCard = function() {
         removeBook(title);
     });
 
+    formCount--;
 }; 
 
 // change hasRead status
@@ -147,8 +147,98 @@ function removeCard(title) {
     divContainer.removeChild(removeTitle);
 };
 
-// get button elements and call functions when clicked
+// get button elements, call functions when clicked, and ensure only one form can be opened at a time
 const addBookButton = document.getElementById("addNewBook");
 
-addBookButton.addEventListener("click", createBook);
+let formCount = 0;
+
+addBookButton.addEventListener("click", () => {
+
+    if (formCount != 0) {
+        return alert("Only one book can be added at a time.");
+    }
+    formCount++;
+    createForm();
+    // createBook();
+});
+
+// create form so user can input information regarding book
+function createForm () {
+
+    const divContainer = document.getElementById("bookCards");
+    const newCard = document.createElement('div');
+    newCard.setAttribute("id", 'bookForm');
+
+    divContainer.appendChild(newCard);
+
+    const userForm = document.createElement("form");
+    userForm.setAttribute("id", "bookData");
+    userForm.setAttribute("onsubmit", "createBook(); return false");
+    newCard.appendChild(userForm);
+
+    const nameDiv = document.createElement("div");
+    const nameInput = document.createElement("input");
+    nameInput.setAttribute("type", "text");
+    nameInput.setAttribute("name", "bookName")
+    nameInput.setAttribute("placeholder", "Book Name");
+    nameInput.setAttribute("required", "");
+    nameDiv.appendChild(nameInput);
+    userForm.appendChild(nameDiv);
+
+    const authorDiv = document.createElement("div");
+    const authorInput = document.createElement("input");
+    authorInput.setAttribute("type", "text");
+    authorInput.setAttribute("name", "Author")
+    authorInput.setAttribute("placeholder", "Author");
+    authorDiv.appendChild(authorInput);
+    userForm.appendChild(authorDiv);
+
+    const reviewDiv = document.createElement("div");
+    const reviewInput = document.createElement("textarea");
+    reviewInput.setAttribute("name", "Author")
+    reviewInput.setAttribute("rows", "10");
+    reviewInput.setAttribute("cols", "25");
+    reviewInput.setAttribute("placeholder", "What do you think about this book?");
+    reviewDiv.appendChild(reviewInput);
+    userForm.appendChild(reviewDiv);
+    
+    const readDiv = document.createElement("div");
+    const fieldset = document.createElement("fieldset");
+    readDiv.appendChild(fieldset);
+
+    const legend = document.createElement("legend");
+    legend.textContent = "Have you read this book?"
+    fieldset.appendChild(legend);
+
+    const radioYes = document.createElement("input");
+    const labelYes = document.createElement("label");
+    radioYes.setAttribute("type", "radio");
+    radioYes.setAttribute("id", "yes");
+    labelYes.setAttribute("for", "yes");
+    radioYes.setAttribute("name", "hasRead");
+    radioYes.setAttribute("value", true);
+    radioYes.setAttribute("required", "");
+    labelYes.textContent = "Yes";
+    fieldset.appendChild(labelYes);
+    fieldset.appendChild(radioYes);
+
+    const radioNo = document.createElement("input");
+    const labelNo = document.createElement("label");
+    radioNo.setAttribute("type", "radio");
+    radioNo.setAttribute("id", "No");
+    labelNo.setAttribute("for", "No");
+    radioNo.setAttribute("name", "hasRead");
+    radioNo.setAttribute("value", false);
+    labelNo.textContent = "No";
+    fieldset.appendChild(labelNo);
+    fieldset.appendChild(radioNo);
+
+    userForm.appendChild(readDiv);
+
+    const submitButton = document.createElement("button");
+    submitButton.setAttribute("type", "submit");
+    submitButton.textContent = "Add Book!";
+    userForm.appendChild(submitButton);
+
+};
 
