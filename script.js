@@ -130,11 +130,6 @@ function showBooks(myLibrary) {
 // creates new book object
 let createBook = function(bookName, author, review, hasRead) {
 
-    // bookName = prompt("name? ");
-    // author = prompt("author? ");
-    // review = prompt("what did you think of it?");
-    // hasRead = prompt("have you read this yet? ")
-
     const newBook = new book(bookName, author, review, hasRead)
     newBook.addBook();
 }
@@ -279,4 +274,14 @@ function getAndCreate() {
     const hasRead = getRead();
     
     createBook(bookName, author, review, hasRead);
+    removeForm();
+};
+
+// remove form - will be used after submit button is pressed
+function removeForm () {
+
+    const removeCard = document.getElementById("bookForm");
+    const divContainer = document.getElementById("bookCards");
+
+    divContainer.removeChild(removeCard);
 };
