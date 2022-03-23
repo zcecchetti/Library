@@ -2,28 +2,29 @@
 // create array to store book data and create initial book object
 let myLibrary = [];
 
-function book(bookName, author, review, hasRead) {
+function book(bookName, author, review, hasRead, bookNumber) {
 
     this.bookName = bookName;
     this.author = author;
     this.review = review;
     this.hasRead = hasRead;
+    this.bookNumber = bookNumber;
 };
 
 // add book to array
 book.prototype.addBook = function() {
     
     myLibrary.push(this);
-    let index = myLibrary.findIndex(x => x.bookName === this.bookName);
+    let index = myLibrary.findIndex(x => x.bookNumber === this.bookNumber);
     myLibrary[index].addBookCard();
 };
 
 // removes book from array
-function removeBook(title) {
+function removeBook(specificBook) {
 
-    let index = myLibrary.findIndex(x => x.bookName === title);
+    let index = myLibrary.findIndex(x => x.bookName === specificBook);
     myLibrary.splice(index, 1);
-    removeCard(title);
+    removeCard(specificBook);
 };
 
 
@@ -32,7 +33,7 @@ book.prototype.addBookCard = function() {
 
     const divContainer = document.getElementById("bookCards");
     const newCard = document.createElement('div');
-    newCard.setAttribute("id", this.bookName);
+    newCard.setAttribute("id", this.bookNumber);
 
     divContainer.appendChild(newCard);
 
@@ -70,10 +71,10 @@ book.prototype.addBookCard = function() {
 
     editButton.addEventListener("click", () => {
 
-        let title = this.bookName;
-        changeRead(title);
+        let specificBook = this.bookNumber;
+        changeRead(specificBook);
         let text = editButton.textContent;
-        changeReadText(text, title);
+        changeReadText(text, specificBook);
     });
 
     const removeButton = document.createElement("button");
@@ -82,17 +83,17 @@ book.prototype.addBookCard = function() {
 
     removeButton.addEventListener("click", () => {
 
-        let title = this.bookName;
-        removeBook(title);
+        let specificBook = this.bookNumber;
+        removeBook(specificBook);
     });
 
     formCount--;
 }; 
 
 // change hasRead status
-function changeRead(title) {
+function changeRead(specificBook) {
 
-    const getCard = document.getElementById(title);
+    const getCard = document.getElementById(specificBook);
     if (getCard.className === "readBook") {
         getCard.classList.remove("readBook");
         getCard.classList.add("notReadBook");
@@ -103,10 +104,10 @@ function changeRead(title) {
 };
 
 // change text in editButton
-function changeReadText(text, title) {
+function changeReadText(text, specificBook) {
 
     // const getCard = document.getElementById("#"+title)
-    const cardContainer = document.querySelector(`#${title}`);
+    const cardContainer = document.querySelector(`#${specificBook}`);
     const actions = cardContainer.querySelector(".actions");
     const editButton = actions.querySelector(".editButton");
     if (text === "Read") {
@@ -128,16 +129,16 @@ function showBooks(myLibrary) {
 }; 
 
 // creates new book object
-let createBook = function(bookName, author, review, hasRead) {
+let createBook = function(bookName, author, review, hasRead, bookNumber) {
 
-    const newBook = new book(bookName, author, review, hasRead)
+    const newBook = new book(bookName, author, review, hasRead, bookNumber)
     newBook.addBook();
 }
 
 // removes the card of an item that was deleted from the array
-function removeCard(title) {
+function removeCard(specificBook) {
 
-    const removeTitle = document.getElementById(title);
+    const removeTitle = document.getElementById(specificBook);
     const divContainer = document.getElementById("bookCards");
     divContainer.removeChild(removeTitle);
 };
@@ -176,6 +177,7 @@ function createForm () {
     nameInput.setAttribute("name", "bookName")
     nameInput.setAttribute("id", "nameText")
     nameInput.setAttribute("placeholder", "Book Name");
+    nameInput.setAttribute("maxlength", "45");
     nameInput.setAttribute("required", "");
     nameDiv.appendChild(nameInput);
     userForm.appendChild(nameDiv);
@@ -186,16 +188,16 @@ function createForm () {
     authorInput.setAttribute("name", "Author")
     authorInput.setAttribute("placeholder", "Author");
     authorInput.setAttribute("id", "authorText")
+    authorInput.setAttribute("maxlength", "45");
     authorDiv.appendChild(authorInput);
     userForm.appendChild(authorDiv);
 
     const reviewDiv = document.createElement("div");
     const reviewInput = document.createElement("textarea");
     reviewInput.setAttribute("name", "Author")
-    // reviewInput.setAttribute("rows", "9");
-    // reviewInput.setAttribute("cols", "29");
     reviewInput.setAttribute("id", "reviewText")
     reviewInput.setAttribute("placeholder", "What do you think about this book?");
+    reviewInput.setAttribute("maxlength", "260");
     reviewDiv.appendChild(reviewInput);
     userForm.appendChild(reviewDiv);
     
@@ -263,6 +265,12 @@ function getRead() {
     return readInput
 };
 
+function createBookNumber() {
+
+    const bookNumber = "book" + myLibrary.length;
+    return bookNumber;
+}
+
 // get entries and create book
 
 function getAndCreate() {
@@ -271,8 +279,9 @@ function getAndCreate() {
     const author = getAuthor();
     const review = getReview();
     const hasRead = getRead();
+    const bookNumber = createBookNumber();
     
-    createBook(bookName, author, review, hasRead);
+    createBook(bookName, author, review, hasRead, bookNumber);
     removeForm();
 };
 
