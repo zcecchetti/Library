@@ -2,13 +2,15 @@
 // create array to store book data and create initial book object
 let myLibrary = [];
 
-function book(bookName, author, review, hasRead, bookNumber) {
+class book {
 
-    this.bookName = bookName;
-    this.author = author;
-    this.review = review;
-    this.hasRead = hasRead;
-    this.bookNumber = bookNumber;
+    constructor(name, author, review, hasRead, bookNumber) {
+        this.bookName = name;
+        this.author = author;
+        this.review = review;
+        this.hasRead = hasRead;
+        this.bookNumber = bookNumber;
+    };
 };
 
 // add book to array
